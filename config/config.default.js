@@ -23,6 +23,23 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
+  config.security = {
+    csrf: {
+      enable: false,
+      // 判断是否需要 ignore 的方法，请求上下文 context 作为第一个参数
+      ignore: (ctx) => {
+        console.log('ctx.request.url',ctx.request.url)
+        return true
+      },
+    },
+  }
+
+  config.cors = {
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+    credentials: true,
+    origin: '*',  // 允许的请求来源（* 表示允许所有的IP的请求 ）
+  }
+
   return {
     ...config,
     ...userConfig,
